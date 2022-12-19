@@ -1,23 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import CardsList from "./Components/CardsList";
+import { Route, Routes } from "react-router-dom";
+import CreateForm from "./Components/CreateForm";
+import ViewCard from "./Components/ViewCard";
+import EditForm from "./Components/EditForm";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Routes>
+        <Route path="/" element={<CardsList />} />
+        <Route path="/posts/new" element={<CreateForm isEdit={false} />} />
+        <Route path="/posts/:id" element={<ViewCard />} />
+        <Route path="/posts/edit/:id" element={<CreateForm isEdit={true} />} />
+      </Routes>
     </div>
   );
 }
