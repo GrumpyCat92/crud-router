@@ -19,10 +19,18 @@ export default function CreateForm({ isEdit }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        id: isEdit ? id : 0,
+        id: isEdit ? +id : 0,
         content: content,
       }),
-    });
+    }).then(() =>
+      isEdit
+        ? navigate(`/posts/${id}`, {
+            state: {
+              content: content,
+            },
+          })
+        : navigate("/")
+    );
   };
 
   useEffect(() => {
@@ -34,7 +42,18 @@ export default function CreateForm({ isEdit }) {
   return (
     <div className="card">
       <div className="card-header">
-        <span className="close" onClick={() => navigate("/")}>
+        <span
+          className="close"
+          onClick={() => {
+            isEdit
+              ? navigate(`/posts/${id}`, {
+                  state: {
+                    content: content,
+                  },
+                })
+              : navigate("/");
+          }}
+        >
           x
         </span>
       </div>
